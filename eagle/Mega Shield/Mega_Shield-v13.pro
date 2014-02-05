@@ -1,25 +1,25 @@
 EAGLE AutoRouter Statistics:
 
-Job           : H:/MHybrid/eagle/Mega Shield/Mega_Shield-v13.brd
+Job           : C:/Users/Brian/Documents/MHybrid/eagle/Mega Shield/Mega_Shield-v13.brd
 
-Start at      : 15:59:35 (1/23/2014)
-End at        : 15:59:49 (1/23/2014)
-Elapsed time  : 00:00:14
+Start at      : 18:58:15 (2/1/2014)
+End at        : 18:58:15 (2/1/2014)
+Elapsed time  : 00:00:00
 
-Signals       :   105   RoutingGrid: 10 mil  Layers: 2
-Connections   :   140   predefined:  28 ( 0 Vias )
+Signals       :   100   RoutingGrid: 20 mil  Layers: 2
+Connections   :   140   predefined:  124 ( 5 Vias )
 
-Router memory :   1310760
+Router memory :   225792
 
 Passname          :    Busses     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Time per pass     :  00:00:00  00:00:02  00:00:03  00:00:03  00:00:03  00:00:03
+Time per pass     :  00:00:00  00:00:00  00:00:00  00:00:00  00:00:00  00:00:00
 Number of Ripups  :         0         0         0         0         0         0
 max. Level        :         0         0         0         0         0         0
 max. Total        :         0         0         0         0         0         0
 
-Routed            :        39       112       112       112       112       112
-Vias              :         0        46        19        11         8        10
-Resolution        :    47.9 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Routed            :         2        16        16        16        16        16
+Vias              :         0        30         5         5         3         3
+Resolution        :    90.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
 Final             : 100.0% finished
