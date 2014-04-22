@@ -10,7 +10,7 @@ LiquidCrystal lcd1(47, 46, 45, 44, 43, 42);
 LiquidCrystal lcd(53, 52, 51, 50, 49, 48);//bottom lcd //(47, 46, 45, 44, 43, 42);//upper lcd
 int shiftD = 22;
 int shiftU = 23;
-int fuelGauge = 33;
+int fuelGauge = A7;
 int gear, grD, grU = 0;
 int fuel;
 String g = "N";
@@ -124,7 +124,11 @@ void loop() {
   Serial.print(gear);
   // FUEL STUFF
   lcd.setCursor(3,1);
-  fuel = analogRead(fuelGauge)/1023*100;
+  fuel = analogRead(fuelGauge);
+  //fuel = map(fuel, 150, 1023, 0, 100);
+  //if (fuel <= 5){
+  //  fuel = 0;
+ // }
   lcd.print(fuel); 
 }
 
