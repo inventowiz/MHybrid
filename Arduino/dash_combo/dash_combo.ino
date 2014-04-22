@@ -125,10 +125,10 @@ void loop() {
   // FUEL STUFF
   lcd.setCursor(3,1);
   fuel = analogRead(fuelGauge);
-  //fuel = map(fuel, 150, 1023, 0, 100);
-  //if (fuel <= 5){
-  //  fuel = 0;
- // }
+  fuel = map(fuel, 2, 35, 0, 100);
+  if (fuel <= 5){
+      fuel = 0;
+  }
   lcd.print(fuel); 
 }
 
