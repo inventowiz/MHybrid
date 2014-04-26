@@ -1,9 +1,10 @@
 #include <LiquidCrystal.h>
 
-int lv = 0;   // low voltage
 int in, n1, n2, n3;
 String  input = "";
 String output = "";
+
+char data[17]; //array to store input data
 
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd1(47, 46, 45, 44, 43, 42);
@@ -18,13 +19,14 @@ int topGear = 3;
 int lowGear = -1;
 int reset = 36;
 
+float HV = 0,LV = 0;
+int spd = 0,rpm = 0,torque = 0;
+
 void setup() {
   Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
+  Serial2.begin(14400);    //open serial port for K-line communication
+  
   lcd1.begin(16, 2); // set up the number of columns and rows on the lcd1 
-  lcd1.setCursor(2, 0);
-  lcd1.print("High");
-  lcd1.setCursor(10, 0);
-  lcd1.print("LOW");
   
   lcd.begin(16, 2); // set up the number of columns and rows on the LCD 
   lcd.setCursor(2, 0);
@@ -39,54 +41,45 @@ void setup() {
 
 void loop() {
 
-  if (Serial.available() > 0) {
-    in = Serial.read();
-    if (in == 65 || in == 66 || input.length() != 0){ //ELIMINATES TRASH BETWEEN THE VALUES. DOES NOT RECORD ANY VAUES UNTIL "A" OR "B"
-      input = input + String(in);
-      // Serial.print("input: ");
-      //Serial.print(input);
+  if (Serial2.available()) {
+    while(Serial2.available() < 17); //wait for 17 bytes
+    //read in the data for processing
+    for(int i=0;i<17;i++)
+      data[i] = Serial2.read();
+    
+    if(data[0] == 'H' &&
+       data[5] == 'L' &&
+       data[10] == 'S' &&
+       data[12] == 'T' &&
+       data[15] == 'R'){
+         
+       //The data is now confirmed valid, start processing.
+       HV = -float(data[1] | (data[2] << 4) | (data[3] << 8) | (data[4] << 12));
+       LV = float(data[6]);
+       spd = int(data[11]);
+       rpm = int(data[13] | (data[14] << 4));
+       torque = int(data[16]);
+       
+       Serial.println("Start packet:");
+       Serial.println(HV);
+       Serial.println(LV);
+       Serial.println(spd);
+       Serial.println(rpm);
+       Serial.println(torque);
+       Serial.println("End packet");
+      
     }
-
-    if (input.length() == 8) { //each digit is represented by 2 digit number    
-
-      if (input.substring(0,2) == "65"){ //if starts with an 'A'
-
-        n1 = input.substring(2,4).toInt();     
-        n2 = input.substring(4,6).toInt();    
-        n3 = input.substring(6).toInt();    
-
-        n1 -= 48;
-        n2 -= 48;
-        n3 -= 48;
-
-        output = String(n1)  + String(n2) + String(n3);
-
-        Serial.print("HIGH: ");
-        Serial.println(output);
-
-        lcd1.setCursor(0, 1);
-        lcd1.print(output);
-      } 
-      else if (input.substring(0,2) == "66") {
-        n1 = input.substring(2,4).toInt();     
-        n2 = input.substring(4,6).toInt();    
-        n3 = input.substring(6).toInt();    
-
-        n1 -= 48;
-        n2 -= 48;
-        n3 -= 48;
-
-        output = String(n1)  + String(n2) + String(n3);
-
-        Serial.print("LOW: ");
-        Serial.println(output);
-
-        lcd1.setCursor(6, 1);
-        lcd1.print(output);
-      }
-      input = input.substring(8);
-    }      
-  } 
+    //display params
+   lcd1.setCursor(0,0);
+   lcd1.print("HI ");
+   lcd1.print(HV,1);
+   lcd1.print(" LO ");
+   lcd1.print(LV,1);
+   lcd1.setCursor(0,1);
+   lcd1.print("T: ");
+   lcd1.print(torque);
+   lcd1.print(" Nm");
+  }
   //GEAR STUFF
   if (digitalRead(reset) == LOW)
   {
@@ -121,7 +114,7 @@ void loop() {
     gear = gear - 1;
     lcd.print(gear);
   }
-  Serial.print(gear);
+  //Serial.print(gear);
   // FUEL STUFF
   lcd.setCursor(3,1);
   fuel = analogRead(fuelGauge);
