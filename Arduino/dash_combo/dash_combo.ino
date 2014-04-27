@@ -29,10 +29,6 @@ void setup() {
   lcd1.begin(16, 2); // set up the number of columns and rows on the lcd1 
   
   lcd.begin(16, 2); // set up the number of columns and rows on the LCD 
-  lcd.setCursor(2, 0);
-  lcd.print("FUEL");
-  lcd.setCursor(9, 0);
-  lcd.print("GEAR");
   
   pinMode(shiftD, INPUT);
   pinMode(shiftU, INPUT);
@@ -68,61 +64,58 @@ void loop() {
        Serial.println(torque);
        Serial.println("End packet");
       
-    }
-    //display params
-   lcd1.setCursor(0,0);
-   lcd1.print("HI ");
-   lcd1.print(HV,1);
-   lcd1.print(" LO ");
-   lcd1.print(LV,1);
-   lcd1.setCursor(0,1);
-   lcd1.print("T: ");
-   lcd1.print(torque);
-   lcd1.print(" Nm");
+     }
+   
+   //flush the buffer
+   while(Serial2.available())
+     char dummy = Serial2.read();
   }
+  //display params
+ lcd1.setCursor(0,0);
+ lcd1.print("HI ");
+ lcd1.print(HV,1);
+ lcd1.print(" LO ");
+ lcd1.print(LV,1);
+ lcd1.setCursor(0,1);
+ lcd1.print("T: ");
+ lcd1.print(torque);
+ 
+ lcd.setCursor(1,0);
+ lcd.print(rpm);
+ lcd.print(" RPM ");
+ lcd.print(spd);
+ lcd.print(" mph");
+  
   //GEAR STUFF
-  if (digitalRead(reset) == LOW)
-  {
+  if (digitalRead(reset) == LOW){
     grD = digitalRead(shiftD);  
     grU = digitalRead(shiftU);
-
     if (grD == HIGH && gear <= topGear && gear >= lowGear)
-    {
       gear = gear - 1;
-    }
     else if (grU == HIGH && gear <= topGear && gear >= lowGear)
-    {
       gear = gear + 1;
-    }
-  }
-  else if (digitalRead(reset) == HIGH) 
-  {
+  }else 
     gear = 0;
-  }
-
-  lcd.setCursor(10,1);
-  if (gear == 0)
-  {
-    lcd.print(g);
-  }
-  else if (gear = -1)
-  {
-    lcd.print(1);
-  }
-  else
-  {
+  lcd1.setCursor(15,1);
+  if (gear == 0){
+    lcd1.print(g);
+  }else if (gear = -1){
+    lcd1.print(1);
+  }else{
     gear = gear - 1;
-    lcd.print(gear);
+    lcd1.print(gear);
   }
   //Serial.print(gear);
   // FUEL STUFF
-  lcd.setCursor(3,1);
+  lcd.setCursor(1,1);
   fuel = analogRead(fuelGauge);
   fuel = map(fuel, 2, 35, 0, 100);
   if (fuel <= 5){
       fuel = 0;
   }
-  lcd.print(fuel); 
+  lcd.print(" Fuel: ");
+  lcd.print(fuel);
+  lcd.print("%"); 
 }
 
 
