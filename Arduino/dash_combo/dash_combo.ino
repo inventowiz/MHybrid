@@ -36,6 +36,9 @@ void setup() {
 }
 
 void loop() {
+  // zero out data frame
+  for(int i=0;i<17;i++)
+    data[i] = 0; 
 
   if (Serial2.available()) {
     while(Serial2.available() < 17); //wait for 17 bytes
@@ -50,7 +53,7 @@ void loop() {
        data[15] == 'R'){
          
        //The data is now confirmed valid, start processing.
-       HV = -float(data[1] | (data[2] << 4) | (data[3] << 8) | (data[4] << 12));
+       HV = -float(data[1]);
        LV = float(data[6]);
        spd = int(data[11]);
        rpm = int(data[13] | (data[14] << 4));
@@ -73,9 +76,10 @@ void loop() {
   //display params
  lcd1.setCursor(0,0);
  lcd1.print("HI ");
- lcd1.print(HV,1);
- lcd1.print(" LO ");
- lcd1.print(LV,1);
+ lcd1.print(HV,0);
+ lcd1.print("V LO ");
+ lcd1.print(LV,0);
+ lcd1.print("V");
  lcd1.setCursor(0,1);
  lcd1.print("T: ");
  lcd1.print(torque);
