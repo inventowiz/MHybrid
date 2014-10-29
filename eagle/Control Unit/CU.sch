@@ -7344,25 +7344,6 @@ between ckt
 <label x="360.68" y="104.14" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$40" class="0">
-<segment>
-<label x="154.94" y="40.64" size="1.778" layer="95"/>
-<wire x1="165.1" y1="40.64" x2="149.86" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="40.64" x2="149.86" y2="22.86" width="0.1524" layer="91"/>
-<pinref part="TS" gate="G$1" pin="1"/>
-<wire x1="149.86" y1="22.86" x2="170.18" y2="22.86" width="0.1524" layer="91"/>
-<pinref part="TS_L" gate="G$1" pin="CKT1"/>
-</segment>
-</net>
-<net name="N$44" class="0">
-<segment>
-<pinref part="TS_R" gate="G$1" pin="CKT1"/>
-<label x="195.58" y="40.64" size="1.778" layer="95"/>
-<pinref part="TS" gate="G$1" pin="5"/>
-<wire x1="205.74" y1="40.64" x2="180.34" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="180.34" y1="40.64" x2="180.34" y2="22.86" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="VSENS_UNFUSED" class="0">
 <segment>
 <pinref part="ABOX0" gate="G$1" pin="CKT3"/>
@@ -7515,10 +7496,23 @@ between ckt
 <segment>
 <pinref part="ADC2" gate="G$1" pin="CKT3"/>
 <label x="218.44" y="-40.64" size="1.778" layer="95"/>
-<wire x1="228.6" y1="-40.64" x2="214.63" y2="-40.64" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="-40.64" x2="215.9" y2="-40.64" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="-40.64" x2="214.63" y2="-40.64" width="0.1524" layer="91"/>
 <wire x1="214.63" y1="-40.64" x2="214.63" y2="-33.02" width="0.1524" layer="91"/>
 <pinref part="ADC" gate="G$1" pin="11"/>
 <wire x1="214.63" y1="-33.02" x2="213.36" y2="-33.02" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="-40.64" x2="215.9" y2="-60.96" width="0.1524" layer="91"/>
+<junction x="215.9" y="-40.64"/>
+<wire x1="215.9" y1="-60.96" x2="147.32" y2="-60.96" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="-60.96" x2="147.32" y2="22.86" width="0.1524" layer="91"/>
+<label x="154.94" y="40.64" size="1.778" layer="95"/>
+<wire x1="165.1" y1="40.64" x2="149.86" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="40.64" x2="149.86" y2="22.86" width="0.1524" layer="91"/>
+<pinref part="TS" gate="G$1" pin="1"/>
+<wire x1="149.86" y1="22.86" x2="170.18" y2="22.86" width="0.1524" layer="91"/>
+<pinref part="TS_L" gate="G$1" pin="CKT1"/>
+<wire x1="147.32" y1="22.86" x2="149.86" y2="22.86" width="0.1524" layer="91"/>
+<junction x="149.86" y="22.86"/>
 </segment>
 </net>
 <net name="N$49" class="0">
@@ -7526,8 +7520,23 @@ between ckt
 <pinref part="ADC2" gate="G$1" pin="CKT4"/>
 <label x="218.44" y="-43.18" size="1.778" layer="95"/>
 <pinref part="ADC" gate="G$1" pin="12"/>
-<wire x1="228.6" y1="-43.18" x2="213.36" y2="-43.18" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="-43.18" x2="226.06" y2="-43.18" width="0.1524" layer="91"/>
+<wire x1="226.06" y1="-43.18" x2="213.36" y2="-43.18" width="0.1524" layer="91"/>
 <wire x1="213.36" y1="-43.18" x2="213.36" y2="-35.56" width="0.1524" layer="91"/>
+<wire x1="226.06" y1="-43.18" x2="226.06" y2="-60.96" width="0.1524" layer="91"/>
+<junction x="226.06" y="-43.18"/>
+<wire x1="226.06" y1="-60.96" x2="242.824" y2="-60.96" width="0.1524" layer="91"/>
+<wire x1="242.824" y1="-60.96" x2="242.824" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="242.824" y1="7.62" x2="195.58" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="7.62" x2="195.58" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="TS_R" gate="G$1" pin="CKT1"/>
+<label x="195.58" y="40.64" size="1.778" layer="95"/>
+<pinref part="TS" gate="G$1" pin="5"/>
+<wire x1="205.74" y1="40.64" x2="180.34" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="180.34" y1="40.64" x2="180.34" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="180.34" y1="25.4" x2="180.34" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="25.4" x2="180.34" y2="25.4" width="0.1524" layer="91"/>
+<junction x="180.34" y="25.4"/>
 </segment>
 </net>
 <net name="INV_ING_L" class="0">

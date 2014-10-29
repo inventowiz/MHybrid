@@ -1,5 +1,10 @@
 #include <LiquidCrystal.h>
 
+#define RESET_PIN 36
+#define shiftU 22
+#define shiftD 23
+#define fuelG A7
+
 int in, n1, n2, n3;
 String  input = "";
 String output = "";
@@ -7,20 +12,17 @@ String output = "";
 char data[17]; //array to store input data
 
 // initialize the library with the numbers of the interface pins
-LiquidCrystal lcd1(47, 46, 45, 44, 43, 42);
-LiquidCrystal lcd(53, 52, 51, 50, 49, 48);//bottom lcd //(47, 46, 45, 44, 43, 42);//upper lcd
-int shiftD = 22;
-int shiftU = 23;
-int fuelGauge = A7;
-int gear, grD, grU = 0;
-int fuel;
-String g = "N";
-int topGear = 3;
-int lowGear = -1;
-int reset = 36;
+LiquidCrystal lcd1(47, 46, 45, 44, 43, 42);  //top lcd
+LiquidCrystal lcd(53, 52, 51, 50, 49, 48);  //bottom lcd
 
+//globals for loop iterations
+int gear = 2;
+int fuel;
+
+//data from dSpace
 float HV = 0,LV = 0;
-int spd = 0,rpm = 0,torque = 0;
+int spd = 0,torque = 0;
+unsigned rpm = 0;
 
 void setup() {
   Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
@@ -32,7 +34,6 @@ void setup() {
   
   pinMode(shiftD, INPUT);
   pinMode(shiftU, INPUT);
-  pinMode(reset, INPUT);
 }
 
 void loop() {
@@ -43,6 +44,7 @@ void loop() {
   if (Serial2.available()) {
     while(Serial2.available() < 17); //wait for 17 bytes
     //read in the data for processing
+ 
     for(int i=0;i<17;i++)
       data[i] = Serial2.read();
     
@@ -53,10 +55,10 @@ void loop() {
        data[15] == 'R'){
          
        //The data is now confirmed valid, start processing.
-       HV = -float(data[1]);
+       HV = float(data[1]);
        LV = float(data[6]);
        spd = int(data[11]);
-       rpm = int(data[13] | (data[14] << 4));
+       rpm = unsigned(data[13]);
        torque = int(data[16]);
        
        Serial.println("Start packet:");
@@ -69,57 +71,70 @@ void loop() {
       
      }
    
-   //flush the buffer
-   while(Serial2.available())
+  //flush the buffer
+  while(Serial2.available())
      char dummy = Serial2.read();
   }
-  //display params
+ 
+  //GEAR STUFF
+  
+  //set up an edge trigger
+  boolean up,down;
+  boolean pup,pdown;
+  
+  up = digitalRead(shiftU);
+  down = digitalRead(shiftD);
+  
+  if(up && !pup)
+    gear++;
+  if(down && !pdown)
+    gear--;
+    
+  pup = up;
+  pdown = down;
+    
+  if(gear > 5){
+    gear = 5;
+  }
+  if(gear < 1)
+    gear = 1;
+  
+  // FUEL STUFF
+  lcd.setCursor(1,1);
+  fuel = analogRead(fuelG);
+  fuel = map(fuel, 2, 35, 0, 100);
+  if (fuel <= 5){
+      fuel = 0;
+  } 
+  
+ //display params
  lcd1.setCursor(0,0);
- lcd1.print("HI ");
+ lcd1.print("H:");
  lcd1.print(HV,0);
- lcd1.print("V LO ");
- lcd1.print(LV,0);
- lcd1.print("V");
+ lcd1.print("V ");
  lcd1.setCursor(0,1);
- lcd1.print("T: ");
+ lcd1.print("T:");
  lcd1.print(torque);
  
  lcd.setCursor(1,0);
  lcd.print(rpm);
- lcd.print(" RPM ");
- lcd.print(spd);
- lcd.print(" mph");
+ lcd.setCursor(6,0);
+ lcd.print("RPM");
+ lcd.setCursor(1,1);
+ lcd.print("L:");
+ lcd.print(LV,0);
+ lcd.print("V");
+ 
+ 
+  lcd1.setCursor(10,0);
+  lcd1.print("F:");
+  lcd1.print(fuel);
+  lcd1.print("%");
   
-  //GEAR STUFF
-  if (digitalRead(reset) == LOW){
-    grD = digitalRead(shiftD);  
-    grU = digitalRead(shiftU);
-    if (grD == HIGH && gear <= topGear && gear >= lowGear)
-      gear = gear - 1;
-    else if (grU == HIGH && gear <= topGear && gear >= lowGear)
-      gear = gear + 1;
-  }else 
-    gear = 0;
-  lcd1.setCursor(15,1);
-  if (gear == 0){
-    lcd1.print(g);
-  }else if (gear = -1){
-    lcd1.print(1);
-  }else{
-    gear = gear - 1;
-    lcd1.print(gear);
-  }
-  //Serial.print(gear);
-  // FUEL STUFF
-  lcd.setCursor(1,1);
-  fuel = analogRead(fuelGauge);
-  fuel = map(fuel, 2, 35, 0, 100);
-  if (fuel <= 5){
-      fuel = 0;
-  }
-  lcd.print(" Fuel: ");
-  lcd.print(fuel);
-  lcd.print("%"); 
+  lcd1.setCursor(11,1);
+  lcd1.print(spd);
+  lcd1.setCursor(13,1);
+  lcd1.print("mph");
 }
 
 
