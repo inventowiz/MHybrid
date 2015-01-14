@@ -143,11 +143,11 @@
 <library name="MHR15-TS">
 <packages>
 <package name="L01Z400S05">
-<pad name="VOUT" x="-17.8" y="-5.2" drill="0.8"/>
-<pad name="VCC" x="-12.8" y="-5.2" drill="0.8"/>
-<pad name="GND" x="-15.3" y="-5.2" drill="0.8"/>
-<pad name="MOUNT2" x="14.5" y="0" drill="1.4"/>
-<pad name="MOUNT1" x="-14.5" y="12" drill="1.4"/>
+<pad name="VOUT" x="-17.8" y="-5.2" drill="1.2"/>
+<pad name="VCC" x="-12.8" y="-5.2" drill="1.2"/>
+<pad name="GND" x="-15.3" y="-5.2" drill="1.2"/>
+<pad name="MOUNT2" x="14.5" y="0" drill="1.6"/>
+<pad name="MOUNT1" x="-14.5" y="12" drill="1.6"/>
 <wire x1="16.5" y1="-3.5" x2="16.5" y2="14" width="0.127" layer="21"/>
 <wire x1="16.5" y1="14" x2="15.5" y2="15" width="0.127" layer="21" curve="90"/>
 <wire x1="15.5" y1="15" x2="-20.5" y2="15" width="0.127" layer="21"/>
