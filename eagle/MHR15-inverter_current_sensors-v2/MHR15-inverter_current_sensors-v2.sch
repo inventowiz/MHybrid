@@ -4172,7 +4172,7 @@ Standard 5-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </sheet>
 </sheets>
 <errors>
-<approved hash="113,1,66.0195,-1.46473,J_INV_SENS,,,,,"/>
+<approved hash="113,1,65.6624,-1.46473,J_INV_SENS,,,,,"/>
 </errors>
 </schematic>
 </drawing>
