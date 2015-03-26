@@ -85,7 +85,7 @@ void loop()
     for(int i=0;i<len;i++){
       Serial.print(i);
       Serial.print(":\t");
-      Serial.println(paramArray[i],HEX);
+      Serial.println((long)paramArray[i],DEC);
     }
   }
 }
