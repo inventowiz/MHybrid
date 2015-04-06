@@ -1,35 +1,32 @@
 #include <mcp_can.h>
 #include <SPI.h>
 #include <Servo.h>
-#include <AccelStepper.h>
 
 // Parameters
 #define INTPIN    2
 #define CSPIN    10
 
 #define ETCTIMEOUT   500
-#define ETCMIN         0
-#define ETCMAX      1600
-#define ETCSPEED     100
-#define ETCACCEL      50
+#define ETCMIN      1900
+#define ETCMAX       900
 
-#define SHIFTHOME     90
-#define SHIFTDOWN      0
-#define SHIFTUP      180
+#define SHIFTHOME   1500
+#define SHIFTDOWN   1100
+#define SHIFTUP     2000
+#define SHIFTHALF   1700
+#define SHIFTDURMS   300
 
-#define ETCSTEP     8
-#define ETCDIR      9
-#define SHIFTPIN   11
+#define ETCPIN         9
+#define SHIFTPIN       3
 
 #define ETCID     0x40
 #define SHIFTID   0x44
 
-#define ETC_PACKET_LEN     2
+#define ETC_PACKET_LEN     1
 #define SHIFT_PACKET_LEN   1
 #define MAX_PACKET_LEN     8
 
-Servo shift;
-AccelStepper etc(AccelStepper::DRIVER,ETCSTEP,ETCDIR);
+Servo shift,etc;
 MCP_CAN CAN0(CSPIN);
 
 // Temporary storage for ISR
@@ -53,9 +50,10 @@ void setup()
   CAN0.begin(CAN_500KBPS); //500kbaud
   attachInterrupt(0,CAN_ISR,FALLING); //int.0 is on pin 2 
   
-  etc.setMaxSpeed(ETCSPEED);
-  etc.setAcceleration(ETCACCEL);
-  shift.attach(SHIFTPIN); shift.write(SHIFTHOME);
+  etc.attach(ETCPIN,800,2200);
+  etc.writeMicroseconds(ETCMIN);
+  shift.attach(SHIFTPIN,600,2400); 
+  shift.writeMicroseconds(SHIFTHOME);
   
   memset((void*)ETCbuf,0,ETC_PACKET_LEN);
   memset((void*)SHIFTbuf,0,SHIFT_PACKET_LEN);
@@ -71,12 +69,53 @@ void loop()
 
   // Check for ETC timeout.
   noInterrupts();
-  if((timeOfLastPacket - millis()) >= ETCTIMEOUT){
+  /*
+  if((millis() - timeOfLastPacket) >= ETCTIMEOUT){
     ETC_pos = ETCMIN;
   }
+  */
   interrupts();
   
   updateDevices();
+
+  if(Serial.available() > 0){ //debugging interface
+    char c = Serial.read();
+    
+    switch(c){
+       default:
+        Serial.println("invalid input");
+        break;
+      case 'u': 
+        // shift up
+        shiftMe(true);
+        break;
+      case 'd':
+        //shift down
+        shiftMe(false);
+        break;
+      case 'h':
+        // half shift
+        shiftHalf();
+        break;
+      case 'n':
+        shiftNeutral();
+        break;
+      case 'e':
+        Serial.print("Enter desired ETC position as integer percent (050%): ");
+        char newpos[3];
+        while(Serial.available() < 3);
+        for(int i=0;i<3;i++)
+          newpos[i] = (Serial.read() - 48); //to number
+        int posfinal = 100*newpos[0] + 10*newpos[1] + newpos[2];
+        posfinal = map(posfinal,0,100,ETCMIN,ETCMAX);
+        Serial.print("\nETC moved to ");
+        Serial.println(posfinal);
+        ETC_pos = posfinal;
+        break;
+
+    }
+    
+  }
 
 }
 
@@ -88,6 +127,8 @@ void CAN_ISR(){
   
   switch(rxId){
     case ETCID:
+      Serial.print("ETC accepted: 0x");
+      Serial.println(rxId,HEX);
       timeOfLastPacket = millis();
       memcpy((void*)ETCbuf,(const void*)rxBuf,ETC_PACKET_LEN);
       changeWasMade = true;
@@ -109,7 +150,7 @@ void updateData(){
   
   // Shifting first
   if(SHIFTbuf[0] & 0x01){
-    interrupts()
+    interrupts();
     // UPSHIFT 
     shiftMe(true);
     noInterrupts();
@@ -121,14 +162,15 @@ void updateData(){
   }
   
   // Now ETC
-  ETC_pos = ETCbuf[0] & (ETCbuf[1] << 8);
+  
+  ETC_pos = map(ETCbuf[0],0,100,ETCMIN,ETCMAX);
   
   interrupts();
 }
 
 void updateDevices(){
   // Push saved data to devices
-  etc.runToNewPosition(ETC_pos);
+  etc.writeMicroseconds(ETC_pos);
 }
 
 void shiftMe(boolean up){
@@ -136,12 +178,33 @@ void shiftMe(boolean up){
   Serial.print("Shifting ");
   Serial.println(up ? "UP" : "DOWN");
   if(up){
-    shift.write(SHIFTUP);
+    etc.writeMicroseconds(ETCMIN); // lose engine
+    shift.writeMicroseconds(SHIFTUP);
+    delay(SHIFTDURMS);
+    shift.writeMicroseconds(SHIFTHOME);
   }else{
-    shift.write(SHIFTDOWN);
+    etc.writeMicroseconds(ETCMIN); // lose engine
+    shift.writeMicroseconds(SHIFTDOWN);
+    delay(SHIFTDURMS);
+    shift.writeMicroseconds(SHIFTHOME);
   }
-  shift.write(SHIFTHOME);
   
   //Shifting executed, clear buffer.
   memset((void*)SHIFTbuf,0,SHIFT_PACKET_LEN);
+}
+
+void shiftHalf(){
+  Serial.println("Half shift");
+  etc.writeMicroseconds(ETCMIN); // lose engine
+  shift.writeMicroseconds(SHIFTHALF);
+  delay(SHIFTDURMS);
+  shift.writeMicroseconds(SHIFTHOME);
+}
+
+void shiftNeutral(){
+  for(int i=0;i<6;i++){
+    shiftMe(false);
+    delay(SHIFTDURMS); 
+  }
+  shiftHalf();
 }

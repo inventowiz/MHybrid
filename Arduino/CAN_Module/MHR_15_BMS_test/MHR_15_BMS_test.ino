@@ -77,7 +77,7 @@ void loop()
         break;
       default:
        Serial.print("Param rejected: ");
-       Serial.println(buf[0]);
+       Serial.println(char(buf[0]));
     }
     Serial.print("Data requested: ");
     Serial.println(buf);
