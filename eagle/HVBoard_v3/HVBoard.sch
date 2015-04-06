@@ -11052,7 +11052,6 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 <part name="R2" library="resistor" deviceset="R-US_" device="R0603" value="10k"/>
 <part name="GND3" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="C3" library="SparkFun-Capacitors" deviceset="CAP_POL" device="PTH3" value="4700uF"/>
-<part name="C4" library="SparkFun-Capacitors" deviceset="CAP_POL" device="PTH3" value="4700uF"/>
 <part name="GND5" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="U$2" library="MHR15-TS" deviceset="110IMY70-15-0TZG" device=""/>
 <part name="R5" library="rcl" deviceset="R-US_" device="R0805"/>
@@ -11083,6 +11082,7 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 <part name="PRE_SAFETY_12V" library="mhybrid molex megaFit" deviceset="MINIFIT_2PIN" device=""/>
 <part name="GND_CON" library="mhybrid molex megaFit" deviceset="MINIFIT_2PIN" device=""/>
 <part name="Q5" library="transistor-power" deviceset="IRF9530" device="" value="IRF9540"/>
+<part name="U$4" library="MHR15-GLV_PWR" deviceset="VFT2045BP-M3/4W" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -11742,7 +11742,7 @@ Connectors on Edges
 <sheet>
 <plain>
 <text x="81.28" y="81.28" size="1.778" layer="94">Design for 10A</text>
-<text x="109.22" y="58.42" size="1.778" layer="94">Design for 12A</text>
+<text x="116.84" y="58.42" size="1.778" layer="94">Design for 12A</text>
 <text x="154.94" y="81.28" size="1.778" layer="94">Design for 12A</text>
 <text x="114.3" y="43.18" size="1.778" layer="94">Design for ...mA</text>
 <text x="66.04" y="55.88" size="1.778" layer="94" rot="R180">leave this open
@@ -11762,8 +11762,7 @@ sensitive enough</text>
 <instance part="R2" gate="G$1" x="167.64" y="73.66" rot="R90"/>
 <instance part="GND3" gate="1" x="167.64" y="66.04"/>
 <instance part="C3" gate="G$1" x="137.16" y="55.88"/>
-<instance part="C4" gate="G$1" x="149.86" y="55.88"/>
-<instance part="GND5" gate="1" x="149.86" y="48.26"/>
+<instance part="GND5" gate="1" x="137.16" y="48.26"/>
 <instance part="U$2" gate="G$1" x="27.94" y="60.96"/>
 <instance part="R5" gate="G$1" x="66.04" y="57.15" rot="R90"/>
 <instance part="GND6" gate="1" x="71.12" y="49.53"/>
@@ -11771,6 +11770,7 @@ sensitive enough</text>
 <instance part="VBATT" gate="G$1" x="35.56" y="119.38"/>
 <instance part="POST_SAFETY_12V" gate="G$1" x="208.28" y="73.66"/>
 <instance part="PRE_SAFETY_12V" gate="G$1" x="170.18" y="53.34" rot="R180"/>
+<instance part="U$4" gate="G$1" x="104.14" y="58.42"/>
 </instances>
 <busses>
 </busses>
@@ -11826,11 +11826,8 @@ sensitive enough</text>
 <pinref part="GND3" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="C4" gate="G$1" pin="-"/>
 <pinref part="GND5" gate="1" pin="GND"/>
 <pinref part="C3" gate="G$1" pin="-"/>
-<wire x1="137.16" y1="50.8" x2="149.86" y2="50.8" width="0.1524" layer="91"/>
-<junction x="149.86" y="50.8"/>
 </segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="VO-"/>
@@ -11881,21 +11878,18 @@ sensitive enough</text>
 </net>
 <net name="PSL" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="D"/>
-<wire x1="99.06" y1="58.42" x2="134.62" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="U$3" gate="G$1" pin="P2"/>
+<wire x1="116.84" y1="58.42" x2="134.62" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="81.28" x2="134.62" y2="81.28" width="0.1524" layer="91"/>
 <wire x1="134.62" y1="81.28" x2="134.62" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="134.62" y1="58.42" x2="137.16" y2="58.42" width="0.1524" layer="91"/>
 <junction x="134.62" y="58.42"/>
 <label x="162.56" y="58.42" size="1.778" layer="95" rot="R90"/>
 <pinref part="C3" gate="G$1" pin="+"/>
-<wire x1="137.16" y1="58.42" x2="149.86" y2="58.42" width="0.1524" layer="91"/>
 <junction x="137.16" y="58.42"/>
-<pinref part="C4" gate="G$1" pin="+"/>
-<wire x1="149.86" y1="58.42" x2="162.56" y2="58.42" width="0.1524" layer="91"/>
-<junction x="149.86" y="58.42"/>
+<wire x1="137.16" y1="58.42" x2="162.56" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="PRE_SAFETY_12V" gate="G$1" pin="P2"/>
+<pinref part="U$4" gate="G$1" pin="P2"/>
 </segment>
 </net>
 <net name="+12VDC" class="0">
@@ -11918,6 +11912,13 @@ sensitive enough</text>
 <pinref part="R5" gate="G$1" pin="2"/>
 <wire x1="66.04" y1="62.23" x2="66.04" y2="63.5" width="0.1524" layer="91"/>
 <junction x="66.04" y="63.5"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="U$4" gate="G$1" pin="P1"/>
+<pinref part="U$1" gate="G$1" pin="D"/>
+<wire x1="99.06" y1="58.42" x2="104.14" y2="58.42" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
