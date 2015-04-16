@@ -6,9 +6,9 @@
 #define INTPIN    2
 #define CSPIN    10
 
-#define ETCTIMEOUT   500
+#define ETCTIMEOUT  1000
 #define ETCMIN      1900
-#define ETCMAX       900
+#define ETCMAX      1175
 
 #define SHIFTHOME   1500
 #define SHIFTDOWN   1100
@@ -20,7 +20,7 @@
 #define SHIFTPIN       3
 
 #define ETCID     0x40
-#define SHIFTID   0x44
+#define SHIFTID   0x42
 
 #define ETC_PACKET_LEN     1
 #define SHIFT_PACKET_LEN   1
@@ -50,7 +50,7 @@ void setup()
   CAN0.begin(CAN_500KBPS); //500kbaud
   attachInterrupt(0,CAN_ISR,FALLING); //int.0 is on pin 2 
   
-  etc.attach(ETCPIN,800,2200);
+  etc.attach(ETCPIN,800,2200); //800,2200
   etc.writeMicroseconds(ETCMIN);
   shift.attach(SHIFTPIN,600,2400); 
   shift.writeMicroseconds(SHIFTHOME);
@@ -69,17 +69,21 @@ void loop()
 
   // Check for ETC timeout.
   noInterrupts();
-  /*
-  if((millis() - timeOfLastPacket) >= ETCTIMEOUT){
-    ETC_pos = ETCMIN;
+  
+  if(((millis() - timeOfLastPacket) >= ETCTIMEOUT) and etc.attached()){
+    etc.writeMicroseconds(ETCMIN);
+    delay(250);
+    etc.detach();
+    Serial.println("ETC detached");
   }
-  */
+  
   interrupts();
   
   updateDevices();
 
   if(Serial.available() > 0){ //debugging interface
     char c = Serial.read();
+    timeOfLastPacket = millis(); 
     
     switch(c){
        default:
@@ -100,6 +104,14 @@ void loop()
       case 'n':
         shiftNeutral();
         break;
+      case '+':
+        Serial.print("\nETC moved to ");
+        Serial.println(ETC_pos += 50);
+        break;
+      case '-':
+        Serial.print("\nETC moved to ");
+        Serial.println(ETC_pos -= 50);
+        break;
       case 'e':
         Serial.print("Enter desired ETC position as integer percent (050%): ");
         char newpos[3];
@@ -107,6 +119,10 @@ void loop()
         for(int i=0;i<3;i++)
           newpos[i] = (Serial.read() - 48); //to number
         int posfinal = 100*newpos[0] + 10*newpos[1] + newpos[2];
+        if(posfinal > 100 or posfinal < 0){
+          Serial.println("Invalid number");
+          break;
+        }
         posfinal = map(posfinal,0,100,ETCMIN,ETCMAX);
         Serial.print("\nETC moved to ");
         Serial.println(posfinal);
@@ -125,10 +141,10 @@ void CAN_ISR(){
   CAN0.readMsgBuf(&len,rxBuf);
   rxId = CAN0.getCanId();
   
+  changeWasMade = true;
+  
   switch(rxId){
     case ETCID:
-      Serial.print("ETC accepted: 0x");
-      Serial.println(rxId,HEX);
       timeOfLastPacket = millis();
       memcpy((void*)ETCbuf,(const void*)rxBuf,ETC_PACKET_LEN);
       changeWasMade = true;
@@ -138,8 +154,6 @@ void CAN_ISR(){
       changeWasMade = true;
       break; 
     default:
-      Serial.print("Packet not accepted: 0x");
-      Serial.println(rxId,HEX);
       break;
   }
 }
@@ -163,14 +177,26 @@ void updateData(){
   
   // Now ETC
   
-  ETC_pos = map(ETCbuf[0],0,100,ETCMIN,ETCMAX);
+  ETC_pos = map(ETCbuf[0],0,255,ETCMIN,ETCMAX);
+  
+  Serial.print("ETC");
+  Serial.print(" - ");
+  Serial.println(ETC_pos);
+  changeWasMade = false;
   
   interrupts();
 }
 
 void updateDevices(){
   // Push saved data to devices
+  //if(! (millis()%1000)) Serial.println(millis() - timeOfLastPacket);
+  noInterrupts();
+  if(!etc.attached() and ((millis() - timeOfLastPacket) < ETCTIMEOUT)){
+    etc.attach(ETCPIN);
+    Serial.println("ETC attached");
+  }
   etc.writeMicroseconds(ETC_pos);
+  interrupts();
 }
 
 void shiftMe(boolean up){
