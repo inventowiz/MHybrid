@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.4"
+    ComputedModelVersion    "1.6"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, -8.0, 1936.0, 1056.0]
+      Location		      [-8.0, -8.0, 1382.0, 744.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -54,7 +54,7 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1693.0, 881.0]
+	Extents			[1139.0, 569.0]
 	ZoomFactor		[1.0]
 	Offset			[233.0, 75.0]
       }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Brian"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Feb 17 23:08:37 2015"
-  RTWModifiedTimeStamp	  346115315
-  ModelVersionFormat	  "1.%<AutoIncrement:4>"
+  LastModifiedDate	  "Wed Apr 15 20:26:14 2015"
+  RTWModifiedTimeStamp	  351030346
+  ModelVersionFormat	  "1.%<AutoIncrement:6>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -801,6 +801,21 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      Gain
+      Gain		      "1"
+      Multiplication	      "Element-wise(K.*u)"
+      ParamMin		      "[]"
+      ParamMax		      "[]"
+      ParamDataTypeStr	      "Inherit: Same as input"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      Inport
       Port		      "1"
       OutputFunctionCall      off
@@ -867,27 +882,10 @@ Model {
       Variant		      off
       GeneratePreprocessorConditionals off
     }
-    Block {
-      BlockType		      TriggerPort
-      TriggerType	      "rising"
-      StatesWhenEnabling      "inherit"
-      PropagateVarSize	      "During execution"
-      ShowOutputPort	      off
-      OutputDataType	      "auto"
-      SampleTimeType	      "triggered"
-      SampleTime	      "1"
-      ZeroCross		      on
-      PortDimensions	      "-1"
-      TriggerSignalSampleTime "-1"
-      OutMin		      "[]"
-      OutMax		      "[]"
-      OutDataTypeStr	      "Inherit: auto"
-      Interpolate	      on
-    }
   }
   System {
     Name		    "RadioComm2015"
-    Location		    [-8, -8, 1928, 1048]
+    Location		    [-8, -8, 1374, 736]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -901,7 +899,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "136"
+    SIDHighWatermark	    "140"
     Block {
       BlockType		      Constant
       Name		      "Constant"
@@ -1051,7 +1049,7 @@ Model {
       BlockType		      SubSystem
       Name		      "RadioComm"
       SID		      "1"
-      Ports		      [7, 2, 0, 1]
+      Ports		      [7, 2]
       Position		      [850, 269, 945, 561]
       ZOrder		      1
       MinAlgLoopOccurrences   off
@@ -1063,7 +1061,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"RadioComm"
-	Location		[-8, -8, 1928, 1048]
+	Location		[-8, 0, 1370, 780]
 	Open			off
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
@@ -1075,12 +1073,12 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"60"
+	ZoomFactor		"80"
 	Block {
 	  BlockType		  Inport
 	  Name			  "HV"
 	  SID			  "2"
-	  Position		  [310, 178, 340, 192]
+	  Position		  [195, 178, 225, 192]
 	  ZOrder		  -1
 	  IconDisplay		  "Port number"
 	  OutDataTypeStr	  "single"
@@ -1089,7 +1087,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "LV"
 	  SID			  "7"
-	  Position		  [325, 373, 355, 387]
+	  Position		  [205, 373, 235, 387]
 	  ZOrder		  4
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -1109,7 +1107,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "RPM"
 	  SID			  "9"
-	  Position		  [325, 703, 355, 717]
+	  Position		  [215, 703, 245, 717]
 	  ZOrder		  6
 	  Port			  "4"
 	  IconDisplay		  "Port number"
@@ -1144,16 +1142,6 @@ Model {
 	  Port			  "7"
 	  IconDisplay		  "Port number"
 	  OutDataTypeStr	  "uint8"
-	}
-	Block {
-	  BlockType		  TriggerPort
-	  Name			  "Trigger"
-	  SID			  "135"
-	  Ports			  []
-	  Position		  [137, 45, 157, 65]
-	  ZOrder		  111
-	  StatesWhenEnabling	  "held"
-	  PortDimensions	  "1"
 	}
 	Block {
 	  BlockType		  Constant
@@ -1384,6 +1372,28 @@ Model {
 	  outScalingMode	  "Treat bit field as an integer"
 	}
 	Block {
+	  BlockType		  Gain
+	  Name			  "Gain"
+	  SID			  "137"
+	  Position		  [290, 170, 320, 200]
+	  ZOrder		  112
+	  Gain			  "100"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain1"
+	  SID			  "138"
+	  Position		  [290, 365, 320, 395]
+	  ZOrder		  113
+	  Gain			  "100"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
 	  BlockType		  Mux
 	  Name			  "Mux"
 	  SID			  "75"
@@ -1448,7 +1458,7 @@ Model {
 	Line {
 	  SrcBlock		  "LV"
 	  SrcPort		  1
-	  DstBlock		  "Data Type Conversion1"
+	  DstBlock		  "Gain1"
 	  DstPort		  1
 	}
 	Line {
@@ -1467,7 +1477,7 @@ Model {
 	Line {
 	  SrcBlock		  "HV"
 	  SrcPort		  1
-	  DstBlock		  "Data Type Conversion2"
+	  DstBlock		  "Gain"
 	  DstPort		  1
 	}
 	Line {
@@ -1587,12 +1597,6 @@ Model {
 	  }
 	}
 	Line {
-	  SrcBlock		  "RPM"
-	  SrcPort		  1
-	  DstBlock		  "Data Type Conversion3"
-	  DstPort		  1
-	}
-	Line {
 	  SrcBlock		  "Extract Bits4"
 	  SrcPort		  1
 	  DstBlock		  "Mux"
@@ -1608,6 +1612,24 @@ Model {
 	  SrcBlock		  "Constant1"
 	  SrcPort		  1
 	  DstBlock		  "ByteLength"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gain"
+	  SrcPort		  1
+	  DstBlock		  "Data Type Conversion2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gain1"
+	  SrcPort		  1
+	  DstBlock		  "Data Type Conversion1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "RPM"
+	  SrcPort		  1
+	  DstBlock		  "Data Type Conversion3"
 	  DstPort		  1
 	}
       }
@@ -1712,9 +1734,12 @@ Model {
     Line {
       SrcBlock		      "Pulse\nGenerator"
       SrcPort		      1
-      Points		      [105, 0]
-      DstBlock		      "RadioComm"
-      DstPort		      trigger
+      Points		      [-5, 0; 190, 0; 0, 0]
+    }
+    Annotation {
+      SID		      "140"
+      Name		      "Trigger to Serial Transmit block"
+      Position		      [875, 179]
     }
   }
 }
