@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2"
+    ComputedModelVersion    "1.6"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, -8.0, 1936.0, 1056.0]
+      Location		      [-8.0, -8.0, 1382.0, 744.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -39,7 +39,7 @@ Model {
 	DockPosition		"Left"
 	Width			[50]
 	Height			[50]
-	Filter			[8]
+	Filter			[9]
       }
       Object {
 	$PropName		"ExplorerBarInfo"
@@ -52,11 +52,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"1"
-	Extents			[1693.0, 881.0]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1139.0, 569.0]
 	ZoomFactor		[1.0]
-	Offset			[0.0, 0.0]
+	Offset			[52.0, 166.0]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Brian"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Feb 18 01:14:23 2015"
-  RTWModifiedTimeStamp	  346122851
-  ModelVersionFormat	  "1.%<AutoIncrement:2>"
+  LastModifiedDate	  "Fri Apr 17 15:17:01 2015"
+  RTWModifiedTimeStamp	  351184615
+  ModelVersionFormat	  "1.%<AutoIncrement:6>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -106,7 +106,7 @@ Model {
     $ObjectID		    6
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "BMS"
-    overrideMode_	    [0U]
+    overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
@@ -888,6 +888,24 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      MultiPortSwitch
+      DataPortOrder	      "One-based contiguous"
+      Inputs		      "3"
+      DataPortIndices	      "{1,2,3}"
+      DataPortForDefault      "Last data port"
+      DiagnosticForDefault    "Error"
+      zeroidx		      off
+      InputSameDT	      on
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+      AllowDiffInputSizes     off
+    }
+    Block {
       BlockType		      Mux
       Inputs		      "4"
       DisplayOption	      "none"
@@ -918,6 +936,13 @@ Model {
       SFunctionModules	      "''"
       PortCounts	      "[]"
       SFunctionDeploymentMode off
+    }
+    Block {
+      BlockType		      Selector
+      NumberOfDimensions      "1"
+      IndexMode		      "One-based"
+      InputPortWidth	      "-1"
+      SampleTime	      "-1"
     }
     Block {
       BlockType		      SubSystem
@@ -989,8 +1014,8 @@ Model {
   }
   System {
     Name		    "BMS"
-    Location		    [-8, -8, 1928, 1048]
-    Open		    off
+    Location		    [-8, -8, 1374, 736]
+    Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1003,13 +1028,13 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "122"
+    SIDHighWatermark	    "167"
     Block {
       BlockType		      SubSystem
       Name		      "BMS"
       SID		      "1"
-      Ports		      [1, 1, 0, 1]
-      Position		      [615, 246, 755, 334]
+      Ports		      [1, 33, 0, 1]
+      Position		      [645, 279, 815, 611]
       ZOrder		      1
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
@@ -1020,8 +1045,8 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"BMS"
-	Location		[-8, -8, 1928, 1048]
-	Open			on
+	Location		[-8, -8, 1374, 736]
+	Open			off
 	ModelBrowserVisibility	on
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1032,12 +1057,12 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"100"
+	ZoomFactor		"150"
 	Block {
 	  BlockType		  Inport
 	  Name			  "CAN Packet"
 	  SID			  "2"
-	  Position		  [45, 183, 75, 197]
+	  Position		  [45, 528, 75, 542]
 	  ZOrder		  -1
 	  IconDisplay		  "Port number"
 	}
@@ -1046,7 +1071,7 @@ Model {
 	  Name			  "Trigger"
 	  SID			  "5"
 	  Ports			  []
-	  Position		  [282, 30, 302, 50]
+	  Position		  [282, 375, 302, 395]
 	  ZOrder		  2
 	  StatesWhenEnabling	  "held"
 	  PortDimensions	  "1"
@@ -1054,16 +1079,16 @@ Model {
 	Block {
 	  BlockType		  Constant
 	  Name			  "Constant"
-	  SID			  "4"
-	  Position		  [630, 25, 740, 55]
-	  ZOrder		  1
-	  Value			  "uint8(hex2dec('4D'))"
+	  SID			  "125"
+	  Position		  [1180, 360, 1210, 390]
+	  ZOrder		  36
+	  Value			  "0"
 	}
 	Block {
 	  BlockType		  DataStoreMemory
 	  Name			  "Data Store\nMemory"
 	  SID			  "6"
-	  Position		  [335, 25, 382, 55]
+	  Position		  [335, 370, 382, 400]
 	  ZOrder		  3
 	  DataStoreName		  "BMS_V"
 	  ReadBeforeWriteMsg	  "warning"
@@ -1077,7 +1102,7 @@ Model {
 	  BlockType		  DataStoreMemory
 	  Name			  "Data Store\nMemory1"
 	  SID			  "7"
-	  Position		  [400, 25, 447, 55]
+	  Position		  [400, 370, 447, 400]
 	  ZOrder		  4
 	  DataStoreName		  "BMS_T"
 	  ReadBeforeWriteMsg	  "warning"
@@ -1091,36 +1116,36 @@ Model {
 	  BlockType		  DataStoreMemory
 	  Name			  "Data Store\nMemory2"
 	  SID			  "8"
-	  Position		  [465, 25, 512, 55]
+	  Position		  [465, 370, 512, 400]
 	  ZOrder		  5
 	  DataStoreName		  "BMS_S"
 	  ReadBeforeWriteMsg	  "warning"
 	  WriteAfterWriteMsg	  "warning"
 	  WriteAfterReadMsg	  "warning"
-	  InitialValue		  "zeros(1,hex2dec('12'))"
+	  InitialValue		  "zeros(1,11)"
 	  OutDataTypeStr	  "uint32"
-	  Dimensions		  "hex2dec('12')"
+	  Dimensions		  "11"
 	}
 	Block {
 	  BlockType		  DataStoreMemory
 	  Name			  "Data Store\nMemory3"
 	  SID			  "9"
-	  Position		  [530, 25, 577, 55]
+	  Position		  [530, 370, 577, 400]
 	  ZOrder		  6
 	  DataStoreName		  "BMS_P"
 	  ReadBeforeWriteMsg	  "warning"
 	  WriteAfterWriteMsg	  "warning"
 	  WriteAfterReadMsg	  "warning"
-	  InitialValue		  "zeros(1,hex2dec('16'))"
+	  InitialValue		  "zeros(1,18)"
 	  OutDataTypeStr	  "uint32"
-	  Dimensions		  "hex2dec('16')"
+	  Dimensions		  "18"
 	}
 	Block {
 	  BlockType		  DataStoreRead
 	  Name			  "Data Store\nRead"
 	  SID			  "103"
 	  Ports			  [0, 1]
-	  Position		  [1085, 60, 1140, 90]
+	  Position		  [1085, 405, 1140, 435]
 	  ZOrder		  27
 	  DataStoreName		  "BMS_V"
 	  DataStoreElements	  "BMS_V"
@@ -1130,7 +1155,7 @@ Model {
 	  Name			  "Data Store\nRead1"
 	  SID			  "104"
 	  Ports			  [0, 1]
-	  Position		  [1085, 130, 1140, 160]
+	  Position		  [1085, 475, 1140, 505]
 	  ZOrder		  28
 	  DataStoreName		  "BMS_T"
 	  DataStoreElements	  "BMS_T"
@@ -1140,7 +1165,7 @@ Model {
 	  Name			  "Data Store\nRead2"
 	  SID			  "105"
 	  Ports			  [0, 1]
-	  Position		  [1085, 200, 1135, 230]
+	  Position		  [1085, 545, 1135, 575]
 	  ZOrder		  29
 	  DataStoreName		  "BMS_S"
 	  DataStoreElements	  "BMS_S"
@@ -1150,7 +1175,7 @@ Model {
 	  Name			  "Data Store\nRead3"
 	  SID			  "106"
 	  Ports			  [0, 1]
-	  Position		  [1085, 270, 1140, 300]
+	  Position		  [1085, 615, 1140, 645]
 	  ZOrder		  30
 	  DataStoreName		  "BMS_P"
 	  DataStoreElements	  "BMS_P"
@@ -1160,7 +1185,7 @@ Model {
 	  Name			  "Decode Packet"
 	  SID			  "13"
 	  Ports			  [1, 3]
-	  Position		  [125, 169, 225, 211]
+	  Position		  [125, 514, 225, 556]
 	  ZOrder		  10
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
@@ -1611,15 +1636,38 @@ Model {
 	      SID		      "18"
 	      Name		      "Byte stream in"
 	      Position		      [110, 92]
+	      ZOrder		      -1
 	    }
 	  }
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  SID			  "130"
+	  Ports			  [1, 18]
+	  Position		  [1180, 599, 1185, 1111]
+	  ZOrder		  41
+	  ShowName		  off
+	  Outputs		  "18"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux1"
+	  SID			  "131"
+	  Ports			  [1, 11]
+	  Position		  [1315, 614, 1320, 1016]
+	  ZOrder		  42
+	  ShowName		  off
+	  Outputs		  "11"
+	  DisplayOption		  "bar"
 	}
 	Block {
 	  BlockType		  Display
 	  Name			  "Display"
 	  SID			  "107"
 	  Ports			  [1]
-	  Position		  [1215, 71, 1300, 519]
+	  Position		  [1095, 34, 1170, 336]
 	  ZOrder		  31
 	  Format		  "hex (Stored Integer)"
 	  Decimation		  "1"
@@ -1630,7 +1678,7 @@ Model {
 	  Name			  "Display1"
 	  SID			  "108"
 	  Ports			  [1]
-	  Position		  [1330, 130, 1420, 510]
+	  Position		  [1195, 34, 1275, 336]
 	  ZOrder		  32
 	  Format		  "hex (Stored Integer)"
 	  Decimation		  "1"
@@ -1641,7 +1689,7 @@ Model {
 	  Name			  "Display2"
 	  SID			  "109"
 	  Ports			  [1]
-	  Position		  [1445, 204, 1540, 556]
+	  Position		  [1460, 339, 1545, 671]
 	  ZOrder		  33
 	  Format		  "hex (Stored Integer)"
 	  Decimation		  "1"
@@ -1652,18 +1700,44 @@ Model {
 	  Name			  "Display3"
 	  SID			  "110"
 	  Ports			  [1]
-	  Position		  [1560, 270, 1650, 690]
+	  Position		  [1565, 269, 1655, 671]
 	  ZOrder		  34
 	  Format		  "hex (Stored Integer)"
 	  Decimation		  "1"
 	  Lockdown		  off
 	}
 	Block {
+	  BlockType		  MultiPortSwitch
+	  Name			  "Index\nVector"
+	  SID			  "124"
+	  Ports			  [2, 1]
+	  Position		  [1260, 391, 1300, 429]
+	  ZOrder		  35
+	  DataPortOrder		  "Zero-based contiguous"
+	  Inputs		  "1"
+	  zeroidx		  on
+	  InputSameDT		  off
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  MultiPortSwitch
+	  Name			  "Index\nVector1"
+	  SID			  "127"
+	  Ports			  [2, 1]
+	  Position		  [1260, 461, 1300, 499]
+	  ZOrder		  38
+	  DataPortOrder		  "Zero-based contiguous"
+	  Inputs		  "1"
+	  zeroidx		  on
+	  InputSameDT		  off
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
 	  BlockType		  SubSystem
 	  Name			  "P update"
 	  SID			  "84"
 	  Ports			  [2, 0, 0, 0, 0, 0, 0, 1]
-	  Position		  [855, 319, 955, 361]
+	  Position		  [855, 664, 955, 706]
 	  ZOrder		  25
 	  TreatAsAtomicUnit	  on
 	  MinAlgLoopOccurrences	  off
@@ -1675,7 +1749,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "P update"
-	    Location		    [-8, -8, 1928, 1048]
+	    Location		    [-8, -8, 1374, 736]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -1912,7 +1986,7 @@ Model {
 	  Name			  "S update"
 	  SID			  "80"
 	  Ports			  [2, 0, 0, 0, 0, 0, 0, 1]
-	  Position		  [715, 319, 815, 361]
+	  Position		  [715, 664, 815, 706]
 	  ZOrder		  24
 	  TreatAsAtomicUnit	  on
 	  MinAlgLoopOccurrences	  off
@@ -1924,7 +1998,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "S update"
-	    Location		    [-8, -8, 1928, 1048]
+	    Location		    [-8, -8, 1374, 736]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -2156,11 +2230,35 @@ Model {
 	  }
 	}
 	Block {
+	  BlockType		  Selector
+	  Name			  "Selector"
+	  SID			  "164"
+	  Ports			  [1, 1]
+	  Position		  [1345, 86, 1390, 234]
+	  ZOrder		  74
+	  InputPortWidth	  "16"
+	  IndexOptions		  "Starting index (dialog)"
+	  Indices		  "[2]"
+	  OutputSizes		  "15"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Selector1"
+	  SID			  "165"
+	  Ports			  [1, 1]
+	  Position		  [1420, 166, 1465, 314]
+	  ZOrder		  75
+	  InputPortWidth	  "16"
+	  IndexOptions		  "Starting index (dialog)"
+	  Indices		  "[2]"
+	  OutputSizes		  "15"
+	}
+	Block {
 	  BlockType		  SwitchCase
 	  Name			  "Switch Case (v,t,s,%)"
 	  SID			  "65"
 	  Ports			  [1, 4]
-	  Position		  [330, 113, 395, 262]
+	  Position		  [330, 458, 395, 607]
 	  ZOrder		  15
 	  CaseConditions	  "{uint8('v'),uint8('t'),uint8('s'),uint8('%')}"
 	  ShowDefaultCase	  off
@@ -2170,7 +2268,7 @@ Model {
 	  Name			  "T update"
 	  SID			  "76"
 	  Ports			  [2, 0, 0, 0, 0, 0, 0, 1]
-	  Position		  [575, 319, 675, 361]
+	  Position		  [575, 664, 675, 706]
 	  ZOrder		  23
 	  TreatAsAtomicUnit	  on
 	  MinAlgLoopOccurrences	  off
@@ -2419,7 +2517,7 @@ Model {
 	  Name			  "V update"
 	  SID			  "72"
 	  Ports			  [2, 0, 0, 0, 0, 0, 0, 1]
-	  Position		  [435, 319, 535, 361]
+	  Position		  [435, 664, 535, 706]
 	  ZOrder		  22
 	  TreatAsAtomicUnit	  on
 	  MinAlgLoopOccurrences	  off
@@ -2431,7 +2529,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "V update"
-	    Location		    [-8, -8, 1928, 1048]
+	    Location		    [-8, -8, 1374, 736]
 	    Open		    off
 	    ModelBrowserVisibility  on
 	    ModelBrowserWidth	    200
@@ -2476,7 +2574,7 @@ Model {
 	      Name		      "Data Store\nRead"
 	      SID		      "11"
 	      Ports		      [0, 1]
-	      Position		      [60, 272, 140, 308]
+	      Position		      [35, 342, 115, 378]
 	      ZOrder		      10
 	      DataStoreName	      "BMS_V"
 	      DataStoreElements	      "BMS_V"
@@ -2670,6 +2768,7 @@ Model {
 	    Line {
 	      SrcBlock		      "Data Store\nRead"
 	      SrcPort		      1
+	      Points		      [54, 0; 0, -70]
 	      DstBlock		      "MATLAB Function"
 	      DstPort		      3
 	    }
@@ -2684,19 +2783,299 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "CAN ID"
-	  SID			  "3"
-	  Position		  [805, 78, 835, 92]
-	  ZOrder		  -2
+	  Name			  "#Voltages"
+	  SID			  "128"
+	  Position		  [1355, 403, 1385, 417]
+	  ZOrder		  39
 	  IconDisplay		  "Port number"
-	  OutDataTypeStr	  "uint8"
 	}
-	Line {
-	  SrcBlock		  "Constant"
-	  SrcPort		  1
-	  Points		  [30, 0; 0, 45]
-	  DstBlock		  "CAN ID"
-	  DstPort		  1
+	Block {
+	  BlockType		  Outport
+	  Name			  "Cell Voltages"
+	  SID			  "162"
+	  Position		  [1485, 113, 1515, 127]
+	  ZOrder		  72
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "#Temps"
+	  SID			  "129"
+	  Position		  [1355, 473, 1385, 487]
+	  ZOrder		  40
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Cell Temps"
+	  SID			  "163"
+	  Position		  [1485, 233, 1515, 247]
+	  ZOrder		  73
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Official Cell Count"
+	  SID			  "132"
+	  Position		  [1205, 593, 1235, 607]
+	  ZOrder		  43
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Observed Cell Count"
+	  SID			  "133"
+	  Position		  [1205, 623, 1235, 637]
+	  ZOrder		  44
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Ave. Cell Temp"
+	  SID			  "134"
+	  Position		  [1205, 653, 1235, 667]
+	  ZOrder		  45
+	  Port			  "7"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Ave. Cell Voltage"
+	  SID			  "135"
+	  Position		  [1205, 683, 1235, 697]
+	  ZOrder		  46
+	  Port			  "8"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Max cell temp"
+	  SID			  "136"
+	  Position		  [1205, 713, 1235, 727]
+	  ZOrder		  47
+	  Port			  "9"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Max cell temp index"
+	  SID			  "137"
+	  Position		  [1205, 743, 1235, 757]
+	  ZOrder		  48
+	  Port			  "10"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Max cell voltage"
+	  SID			  "138"
+	  Position		  [1205, 773, 1235, 787]
+	  ZOrder		  49
+	  Port			  "11"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Max cell voltage index"
+	  SID			  "139"
+	  Position		  [1205, 803, 1235, 817]
+	  ZOrder		  50
+	  Port			  "12"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Min cell voltage"
+	  SID			  "140"
+	  Position		  [1205, 833, 1235, 847]
+	  ZOrder		  51
+	  Port			  "13"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Min cell voltage index"
+	  SID			  "141"
+	  Position		  [1205, 863, 1235, 877]
+	  ZOrder		  52
+	  Port			  "14"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack charge (voltage)"
+	  SID			  "142"
+	  Position		  [1205, 893, 1235, 907]
+	  ZOrder		  53
+	  Port			  "15"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack current (meas.)"
+	  SID			  "143"
+	  Position		  [1205, 923, 1235, 937]
+	  ZOrder		  54
+	  Port			  "16"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack Capacity (SoC%)"
+	  SID			  "144"
+	  Position		  [1205, 953, 1235, 967]
+	  ZOrder		  55
+	  Port			  "17"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack Alert (displayed)"
+	  SID			  "145"
+	  Position		  [1205, 983, 1235, 997]
+	  ZOrder		  56
+	  Port			  "18"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Timestamp"
+	  SID			  "146"
+	  Position		  [1205, 1013, 1235, 1027]
+	  ZOrder		  57
+	  Port			  "19"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Reserved (DNC)"
+	  SID			  "147"
+	  Position		  [1205, 1043, 1235, 1057]
+	  ZOrder		  58
+	  Port			  "20"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Min cell temp"
+	  SID			  "148"
+	  Position		  [1205, 1073, 1235, 1087]
+	  ZOrder		  59
+	  Port			  "21"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Min cell temp index"
+	  SID			  "149"
+	  Position		  [1205, 1103, 1235, 1117]
+	  ZOrder		  60
+	  Port			  "22"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack Normal"
+	  SID			  "150"
+	  Position		  [1345, 633, 1375, 647]
+	  ZOrder		  61
+	  Port			  "23"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Cell temp too high"
+	  SID			  "151"
+	  Position		  [1345, 668, 1375, 682]
+	  ZOrder		  62
+	  Port			  "24"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Cell voltage too high"
+	  SID			  "152"
+	  Position		  [1345, 703, 1375, 717]
+	  ZOrder		  63
+	  Port			  "25"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack over voltage"
+	  SID			  "153"
+	  Position		  [1345, 738, 1375, 752]
+	  ZOrder		  64
+	  Port			  "26"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Cell voltage too low"
+	  SID			  "154"
+	  Position		  [1345, 773, 1375, 787]
+	  ZOrder		  65
+	  Port			  "27"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack under voltage"
+	  SID			  "155"
+	  Position		  [1345, 808, 1375, 822]
+	  ZOrder		  66
+	  Port			  "28"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack over current alarm"
+	  SID			  "156"
+	  Position		  [1345, 843, 1375, 857]
+	  ZOrder		  67
+	  Port			  "29"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack over current warn"
+	  SID			  "157"
+	  Position		  [1345, 878, 1375, 892]
+	  ZOrder		  68
+	  Port			  "30"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Ground fault detected"
+	  SID			  "158"
+	  Position		  [1345, 913, 1375, 927]
+	  ZOrder		  69
+	  Port			  "31"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Pack has unmanaged cells "
+	  SID			  "159"
+	  Position		  [1345, 948, 1375, 962]
+	  ZOrder		  70
+	  Port			  "32"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "System error"
+	  SID			  "160"
+	  Position		  [1345, 983, 1375, 997]
+	  ZOrder		  71
+	  Port			  "33"
+	  IconDisplay		  "Port number"
 	}
 	Line {
 	  SrcBlock		  "CAN Packet"
@@ -2801,29 +3180,287 @@ Model {
 	Line {
 	  SrcBlock		  "Data Store\nRead"
 	  SrcPort		  1
-	  Points		  [49, 0; 0, 220]
-	  DstBlock		  "Display"
-	  DstPort		  1
+	  Points		  [49, 0]
+	  Branch {
+	    Points		    [0, 48; -124, 0; 0, -283]
+	    DstBlock		    "Display"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [30, 0]
+	    Branch {
+	      Points		      [0, -57; 68, 0; 0, -203]
+	      DstBlock		      "Selector"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "Index\nVector"
+	      DstPort		      2
+	    }
+	  }
 	}
 	Line {
 	  SrcBlock		  "Data Store\nRead1"
 	  SrcPort		  1
-	  Points		  [32, 0; 0, 408; 133, 0; 0, -233]
-	  DstBlock		  "Display1"
-	  DstPort		  1
+	  Points		  [32, 0]
+	  Branch {
+	    Points		    [35, 0]
+	    Branch {
+	      Points		      [0, 49; 191, 0; 0, -299]
+	      DstBlock		      "Selector1"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "Index\nVector1"
+	      DstPort		      2
+	    }
+	  }
+	  Branch {
+	    Points		    [0, 48; -124, 0; 0, -519; 127, 0]
+	    DstBlock		    "Display1"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  SrcBlock		  "Data Store\nRead2"
 	  SrcPort		  1
-	  Points		  [16, 0; 0, 362; 274, 0]
-	  DstBlock		  "Display2"
-	  DstPort		  1
+	  Points		  [136, 0]
+	  Branch {
+	    Points		    [0, 255]
+	    DstBlock		    "Demux1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [169, 0]
+	    DstBlock		    "Display2"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  SrcBlock		  "Data Store\nRead3"
 	  SrcPort		  1
-	  Points		  [3, 0; 0, 319; 397, 0; 0, -124]
-	  DstBlock		  "Display3"
+	  Points		  [3, 0; 0, -49; 16, 0]
+	  Branch {
+	    Points		    [0, 274]
+	    DstBlock		    "Demux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [267, 0; 0, -257; 119, 0]
+	    DstBlock		    "Display3"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  Points		  [30, 0; 0, 25]
+	  Branch {
+	    DstBlock		    "Index\nVector1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Index\nVector"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Index\nVector"
+	  SrcPort		  1
+	  DstBlock		  "#Voltages"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Index\nVector1"
+	  SrcPort		  1
+	  DstBlock		  "#Temps"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  DstBlock		  "Official Cell Count"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  DstBlock		  "Observed Cell Count"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  3
+	  DstBlock		  "Ave. Cell Temp"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  4
+	  DstBlock		  "Ave. Cell Voltage"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  5
+	  DstBlock		  "Max cell temp"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  6
+	  DstBlock		  "Max cell temp index"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  7
+	  DstBlock		  "Max cell voltage"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  8
+	  DstBlock		  "Max cell voltage index"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  9
+	  DstBlock		  "Min cell voltage"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  10
+	  DstBlock		  "Min cell voltage index"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  11
+	  DstBlock		  "Pack charge (voltage)"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  12
+	  DstBlock		  "Pack current (meas.)"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  13
+	  DstBlock		  "Pack Capacity (SoC%)"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  14
+	  DstBlock		  "Pack Alert (displayed)"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  15
+	  DstBlock		  "Timestamp"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  16
+	  DstBlock		  "Reserved (DNC)"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  17
+	  DstBlock		  "Min cell temp"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  18
+	  DstBlock		  "Min cell temp index"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  1
+	  DstBlock		  "Pack Normal"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  2
+	  DstBlock		  "Cell temp too high"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  3
+	  DstBlock		  "Cell voltage too high"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  4
+	  DstBlock		  "Pack over voltage"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  5
+	  DstBlock		  "Cell voltage too low"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  6
+	  DstBlock		  "Pack under voltage"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  7
+	  DstBlock		  "Pack over current alarm"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  8
+	  DstBlock		  "Pack over current warn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  9
+	  DstBlock		  "Ground fault detected"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  10
+	  DstBlock		  "Pack has unmanaged cells "
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  11
+	  DstBlock		  "System error"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Selector"
+	  SrcPort		  1
+	  Points		  [37, 0; 0, -40]
+	  DstBlock		  "Cell Voltages"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Selector1"
+	  SrcPort		  1
+	  DstBlock		  "Cell Temps"
 	  DstPort		  1
 	}
       }
@@ -2870,7 +3507,7 @@ Model {
       SID		      "38"
       Position		      [165, 375, 215, 405]
       ZOrder		      21
-      Value		      "uint8('%')"
+      Value		      "uint8('v')"
       OutDataTypeStr	      "uint8"
     }
     Block {
@@ -2940,7 +3577,7 @@ Model {
       Name		      "Mux2"
       SID		      "33"
       Ports		      [3, 1]
-      Position		      [405, 351, 410, 429]
+      Position		      [385, 351, 390, 429]
       ZOrder		      16
       ShowName		      off
       Inputs		      "3"
@@ -2951,7 +3588,7 @@ Model {
       Name		      "Pulse\nGenerator"
       SID		      "20"
       Ports		      [0, 1]
-      Position		      [505, 149, 535, 181]
+      Position		      [455, 234, 485, 266]
       ZOrder		      3
       PulseType		      "Time based"
       Period		      ".5"
@@ -2974,7 +3611,7 @@ Model {
     Line {
       SrcBlock		      "Pulse\nGenerator"
       SrcPort		      1
-      Points		      [145, 0]
+      Points		      [240, 0]
       DstBlock		      "BMS"
       DstPort		      trigger
     }
@@ -3042,7 +3679,7 @@ Model {
     Line {
       SrcBlock		      "Mux2"
       SrcPort		      1
-      Points		      [97, 0; 0, -100]
+      Points		      [74, 0; 0, 55]
       DstBlock		      "BMS"
       DstPort		      1
     }
@@ -3066,6 +3703,27 @@ Model {
       DstBlock		      "Sum"
       DstPort		      2
     }
+    Annotation {
+      SID		      "167"
+      Name		      "Test packet"
+      Position		      [401, 456]
+    }
+    Annotation {
+      SID		      "166"
+      Name		      "See EMS\nCANBUS Spec\nFor details on outputs"
+      Position		      [911, 405]
+    }
+    Annotation {
+      SID		      "161"
+      Name		      "Whenever a new packet arrives"
+      Position		      [580, 241]
+    }
+    Annotation {
+      SID		      "123"
+      Name		      "Packets to 0x4D"
+      Position		      [582, 437]
+      ZOrder		      -1
+    }
   }
 }
 # Finite State Machines
@@ -3081,8 +3739,6 @@ Stateflow {
     created		    "18-Feb-2015 01:00:32"
     isLibrary		    0
     firstTarget		    38
-    debug {
-    }
     sfVersion		    76014001.0015
   }
   chart {
@@ -3096,8 +3752,6 @@ Stateflow {
     firstJunction	    8
     viewObj		    2
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    7
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3258,10 +3912,7 @@ Stateflow {
     firstTransition	    18
     firstJunction	    17
     viewObj		    11
-    visible		    1
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    7
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3423,8 +4074,6 @@ Stateflow {
     firstJunction	    26
     viewObj		    20
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    7
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
@@ -3586,8 +4235,6 @@ Stateflow {
     firstJunction	    35
     viewObj		    29
     machine		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    7
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
