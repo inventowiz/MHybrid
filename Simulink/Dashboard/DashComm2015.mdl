@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.5"
+    ComputedModelVersion    "1.7"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -55,7 +55,7 @@ Model {
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [1139.0, 566.0]
+	  Extents		  [1217.0, 566.0]
 	  ZoomFactor		  [1.0]
 	  Offset		  [326.66282997239932, 215.19972135541298]
 	}
@@ -64,9 +64,9 @@ Model {
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "1"
-	  Extents		  [1139.0, 566.0]
-	  ZoomFactor		  [0.6]
-	  Offset		  [-46.649995184343673, -88.355759744600732]
+	  Extents		  [1217.0, 566.0]
+	  ZoomFactor		  [0.8]
+	  Offset		  [148.55833814898972, -51.329713913059493]
 	}
 	PropName		"EditorsInfo"
       }
@@ -78,9 +78,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Brian"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Apr 06 12:49:52 2015"
-  RTWModifiedTimeStamp	  350225384
-  ModelVersionFormat	  "1.%<AutoIncrement:5>"
+  LastModifiedDate	  "Wed Apr 22 21:38:16 2015"
+  RTWModifiedTimeStamp	  351639344
+  ModelVersionFormat	  "1.%<AutoIncrement:7>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -795,6 +795,12 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
       BlockType		      Display
       Format		      "short"
       Decimation	      "10"
@@ -860,6 +866,13 @@ Model {
       InitialOutput	      "[]"
     }
     Block {
+      BlockType		      S-Function
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+      SFunctionDeploymentMode off
+    }
+    Block {
       BlockType		      SubSystem
       ShowPortLabels	      "FromPortIcon"
       Permissions	      "ReadWrite"
@@ -883,6 +896,9 @@ Model {
       Variant		      off
       GeneratePreprocessorConditionals off
     }
+    Block {
+      BlockType		      Terminator
+    }
   }
   System {
     Name		    "DashComm2015"
@@ -900,7 +916,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "194"
+    SIDHighWatermark	    "199"
     Block {
       BlockType		      Constant
       Name		      "Constant"
@@ -961,8 +977,8 @@ Model {
       BlockType		      SubSystem
       Name		      "DashComm"
       SID		      "1"
-      Ports		      [7, 14]
-      Position		      [850, 296, 980, 594]
+      Ports		      [7, 16]
+      Position		      [850, 298, 980, 597]
       ZOrder		      1
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
@@ -985,7 +1001,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"60"
+	ZoomFactor		"80"
 	Block {
 	  BlockType		  Inport
 	  Name			  "HV"
@@ -1113,6 +1129,14 @@ Model {
 	  SID			  "180"
 	  Position		  [1320, 545, 1350, 575]
 	  ZOrder		  157
+	  OutDataTypeStr	  "uint8"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant7"
+	  SID			  "197"
+	  Position		  [1305, 75, 1335, 105]
+	  ZOrder		  163
 	  OutDataTypeStr	  "uint8"
 	}
 	Block {
@@ -1317,6 +1341,134 @@ Model {
 	  SaturateOnIntegerOverflow off
 	}
 	Block {
+	  BlockType		  SubSystem
+	  Name			  "Gear selector"
+	  SID			  "198"
+	  Ports			  [2, 1]
+	  Position		  [1125, 16, 1270, 69]
+	  ZOrder		  164
+	  LibraryVersion	  "1.32"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  SFBlockType		  "MATLAB Function"
+	  System {
+	    Name		    "Gear selector"
+	    Location		    [223, 338, 826, 833]
+	    Open		    off
+	    ModelBrowserVisibility  on
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "21"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "engine"
+	      SID		      "198::1"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "wheel"
+	      SID		      "198::21"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      7
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "198::19"
+	      Ports		      [1, 1]
+	      Position		      [270, 230, 320, 270]
+	      ZOrder		      5
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "198::18"
+	      Tag		      "Stateflow S-Function DashComm2015 2"
+	      Ports		      [2, 2]
+	      Position		      [180, 100, 230, 160]
+	      ZOrder		      4
+	      FunctionName	      "sf_sfun"
+	      PortCounts	      "[2 2]"
+	      EnableBusSupport	      off
+	      Port {
+		PortNumber		2
+		Name			"gear"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "198::20"
+	      Position		      [460, 241, 480, 259]
+	      ZOrder		      6
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "gear"
+	      SID		      "198::5"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      -5
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "engine"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "wheel"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      Name		      "gear"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "gear"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
 	  BlockType		  Mux
 	  Name			  "Mux"
 	  SID			  "142"
@@ -1361,8 +1513,20 @@ Model {
 	  DisplayOption		  "bar"
 	}
 	Block {
+	  BlockType		  Gain
+	  Name			  "mph->RPM"
+	  SID			  "199"
+	  Position		  [952, 90, 1178, 125]
+	  ZOrder		  165
+	  BlockRotation		  270
+	  Gain			  "(5280*12)/(14*pi*60)"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
 	  BlockType		  Outport
-	  Name			  "Packet 0x05F0"
+	  Name			  "Packet 0x0010"
 	  SID			  "22"
 	  Position		  [740, 108, 770, 122]
 	  ZOrder		  19
@@ -1370,7 +1534,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "ByteLength 0x05F0"
+	  Name			  "ByteLength 0x0010"
 	  SID			  "129"
 	  Position		  [740, 163, 770, 177]
 	  ZOrder		  109
@@ -1380,7 +1544,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Packet 0x05F1"
+	  Name			  "Packet 0x0020"
 	  SID			  "155"
 	  Position		  [740, 298, 770, 312]
 	  ZOrder		  124
@@ -1389,7 +1553,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "ByteLength 0x05F1"
+	  Name			  "ByteLength 0x0020"
 	  SID			  "156"
 	  Position		  [740, 353, 770, 367]
 	  ZOrder		  125
@@ -1399,7 +1563,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Packet 0x05F2"
+	  Name			  "Packet 0x0050"
 	  SID			  "162"
 	  Position		  [665, 453, 695, 467]
 	  ZOrder		  132
@@ -1408,7 +1572,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "ByteLength 0x05F2"
+	  Name			  "ByteLength 0x0050"
 	  SID			  "163"
 	  Position		  [665, 508, 695, 522]
 	  ZOrder		  133
@@ -1418,7 +1582,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Packet 0x05F3"
+	  Name			  "Packet 0x0040"
 	  SID			  "170"
 	  Position		  [750, 643, 780, 657]
 	  ZOrder		  139
@@ -1427,7 +1591,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "ByteLength 0x05F3"
+	  Name			  "ByteLength 0x0040"
 	  SID			  "171"
 	  Position		  [750, 698, 780, 712]
 	  ZOrder		  140
@@ -1437,7 +1601,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Packet 0x05F4"
+	  Name			  "Packet 0x0070"
 	  SID			  "172"
 	  Position		  [1445, 153, 1475, 167]
 	  ZOrder		  147
@@ -1446,7 +1610,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "ByteLength 0x05F4"
+	  Name			  "ByteLength 0x0070"
 	  SID			  "173"
 	  Position		  [1445, 208, 1475, 222]
 	  ZOrder		  148
@@ -1456,7 +1620,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Packet 0x05F6"
+	  Name			  "Packet 0x0090"
 	  SID			  "177"
 	  Position		  [1445, 313, 1475, 327]
 	  ZOrder		  152
@@ -1465,7 +1629,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "ByteLength 0x05F6"
+	  Name			  "ByteLength 0x0090"
 	  SID			  "178"
 	  Position		  [1445, 368, 1475, 382]
 	  ZOrder		  153
@@ -1475,7 +1639,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Packet 0x05F7"
+	  Name			  "Packet 0x0080"
 	  SID			  "181"
 	  Position		  [1445, 493, 1475, 507]
 	  ZOrder		  155
@@ -1484,7 +1648,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "ByteLength 0x05F7"
+	  Name			  "ByteLength 0x0080"
 	  SID			  "182"
 	  Position		  [1445, 548, 1475, 562]
 	  ZOrder		  156
@@ -1492,16 +1656,29 @@ Model {
 	  IconDisplay		  "Port number"
 	  OutDataTypeStr	  "uint8"
 	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Packet 0x0030"
+	  SID			  "195"
+	  Position		  [1445, 28, 1475, 42]
+	  ZOrder		  161
+	  Port			  "15"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "ByteLength 0x0030"
+	  SID			  "196"
+	  Position		  [1445, 83, 1475, 97]
+	  ZOrder		  162
+	  Port			  "16"
+	  IconDisplay		  "Port number"
+	  OutDataTypeStr	  "uint8"
+	}
 	Line {
 	  SrcBlock		  "LV"
 	  SrcPort		  1
 	  DstBlock		  "Gain1"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "RPM"
-	  SrcPort		  1
-	  DstBlock		  "Data Type Conversion3"
 	  DstPort		  1
 	}
 	Line {
@@ -1513,13 +1690,13 @@ Model {
 	Line {
 	  SrcBlock		  "Constant"
 	  SrcPort		  1
-	  DstBlock		  "ByteLength 0x05F0"
+	  DstBlock		  "ByteLength 0x0010"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "Mux"
 	  SrcPort		  1
-	  DstBlock		  "Packet 0x05F0"
+	  DstBlock		  "Packet 0x0010"
 	  DstPort		  1
 	}
 	Line {
@@ -1564,13 +1741,13 @@ Model {
 	Line {
 	  SrcBlock		  "Constant1"
 	  SrcPort		  1
-	  DstBlock		  "ByteLength 0x05F1"
+	  DstBlock		  "ByteLength 0x0020"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "Mux1"
 	  SrcPort		  1
-	  DstBlock		  "Packet 0x05F1"
+	  DstBlock		  "Packet 0x0020"
 	  DstPort		  1
 	}
 	Line {
@@ -1609,13 +1786,13 @@ Model {
 	Line {
 	  SrcBlock		  "Constant2"
 	  SrcPort		  1
-	  DstBlock		  "ByteLength 0x05F2"
+	  DstBlock		  "ByteLength 0x0050"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "Mux2"
 	  SrcPort		  1
-	  DstBlock		  "Packet 0x05F2"
+	  DstBlock		  "Packet 0x0050"
 	  DstPort		  1
 	}
 	Line {
@@ -1648,13 +1825,13 @@ Model {
 	Line {
 	  SrcBlock		  "Constant3"
 	  SrcPort		  1
-	  DstBlock		  "ByteLength 0x05F3"
+	  DstBlock		  "ByteLength 0x0040"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "Mux3"
 	  SrcPort		  1
-	  DstBlock		  "Packet 0x05F3"
+	  DstBlock		  "Packet 0x0040"
 	  DstPort		  1
 	}
 	Line {
@@ -1693,43 +1870,84 @@ Model {
 	Line {
 	  SrcBlock		  "Speed"
 	  SrcPort		  1
-	  Points		  [475, 0]
-	  DstBlock		  "Packet 0x05F4"
-	  DstPort		  1
+	  Points		  [110, 0]
+	  Branch {
+	    Points		    [365, 0]
+	    DstBlock		    "Packet 0x0070"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "mph->RPM"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  SrcBlock		  "Constant4"
 	  SrcPort		  1
-	  DstBlock		  "ByteLength 0x05F4"
+	  DstBlock		  "ByteLength 0x0070"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "Torque"
 	  SrcPort		  1
 	  Points		  [205, 0; 0, -20]
-	  DstBlock		  "Packet 0x05F6"
+	  DstBlock		  "Packet 0x0090"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "Constant5"
 	  SrcPort		  1
 	  Points		  [75, 0]
-	  DstBlock		  "ByteLength 0x05F6"
+	  DstBlock		  "ByteLength 0x0090"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "SoC"
 	  SrcPort		  1
 	  Points		  [212, 0; 0, -20]
-	  DstBlock		  "Packet 0x05F7"
+	  DstBlock		  "Packet 0x0080"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "Constant6"
 	  SrcPort		  1
 	  Points		  [75, 0]
-	  DstBlock		  "ByteLength 0x05F7"
+	  DstBlock		  "ByteLength 0x0080"
 	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant7"
+	  SrcPort		  1
+	  DstBlock		  "ByteLength 0x0030"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gear selector"
+	  SrcPort		  1
+	  Points		  [9, 0; 0, -10]
+	  DstBlock		  "Packet 0x0030"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "mph->RPM"
+	  SrcPort		  1
+	  Points		  [0, -30]
+	  DstBlock		  "Gear selector"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "RPM"
+	  SrcPort		  1
+	  Points		  [39, 0]
+	  Branch {
+	    Points		    [0, -56; 303, 0; 0, 65; 257, 0; 0, -394]
+	    DstBlock		    "Gear selector"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Data Type Conversion3"
+	    DstPort		    1
+	  }
 	}
       }
     }
@@ -1863,7 +2081,7 @@ Model {
     Line {
       SrcBlock		      "DashComm"
       SrcPort		      1
-      Points		      [10, 0; 0, -20; 165, 0; 0, 10]
+      Points		      [10, 0; 0, -40; 165, 0]
       DstBlock		      "Display"
       DstPort		      1
     }
@@ -1877,49 +2095,49 @@ Model {
     Line {
       SrcBlock		      "Data Type Conversion1"
       SrcPort		      1
-      Points		      [137, 0; 0, 30]
+      Points		      [137, 0; 0, 35]
       DstBlock		      "DashComm"
       DstPort		      2
     }
     Line {
       SrcBlock		      "Data Type Conversion2"
       SrcPort		      1
-      Points		      [90, 0; 0, 30]
+      Points		      [90, 0; 0, 35]
       DstBlock		      "DashComm"
       DstPort		      3
     }
     Line {
       SrcBlock		      "Data Type Conversion3"
       SrcPort		      1
-      Points		      [85, 0; 0, 30]
+      Points		      [85, 0; 0, 35]
       DstBlock		      "DashComm"
       DstPort		      4
     }
     Line {
       SrcBlock		      "Data Type Conversion4"
       SrcPort		      1
-      Points		      [95, 0; 0, 30]
+      Points		      [95, 0; 0, 35]
       DstBlock		      "DashComm"
       DstPort		      5
     }
     Line {
       SrcBlock		      "Data Type Conversion5"
       SrcPort		      1
-      Points		      [28, 0; 0, -25]
+      Points		      [28, 0; 0, -20]
       DstBlock		      "DashComm"
       DstPort		      7
     }
     Line {
       SrcBlock		      "Data Type Conversion6"
       SrcPort		      1
-      Points		      [37, 0; 0, -10]
+      Points		      [37, 0; 0, -5]
       DstBlock		      "DashComm"
       DstPort		      6
     }
     Line {
       SrcBlock		      "DashComm"
       SrcPort		      2
-      Points		      [9, 0; 0, -15]
+      Points		      [9, 0; 0, -30]
       DstBlock		      "Display1"
       DstPort		      1
     }
@@ -1937,11 +2155,164 @@ Stateflow {
     name		    "DashComm2015"
     created		    "17-Feb-2015 22:02:19"
     isLibrary		    0
-    firstTarget		    2
+    firstTarget		    10
     sfVersion		    76014001.0015
   }
-  target {
+  chart {
     id			    2
+    name		    "DashComm/Gear selector"
+    windowPosition	    [357.331 483.407 167 391]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1280 1024 1.041050272174191]
+    treeNode		    [0 3 0 0]
+    firstTransition	    8
+    firstJunction	    7
+    viewObj		    2
+    visible		    1
+    machine		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    6
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    4
+    chartFileNumber	    2
+    disableImplicitCasting  1
+    eml {
+      name		      "speedsToGear"
+    }
+  }
+  state {
+    id			    3
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 0 0]
+    superState		    SUBCHART
+    subviewer		    2
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function gear   = speedsToGear( engine,wheel )\n    primary_gear = (24/73);\n    gear1=13/32;\n  "
+      "  gear2=16/32;\n    gear3=17/28;\n    gear4=19/26;\n    gear5=21/25;\n    sprockets=13/50;\n    \n    output_rpm"
+      " = wheel;\n    engine_rpm = engine;\n    \n    gear = 0;\n    \n    %calculates the engine speed for each gear b"
+      "ased on the actual output\n    engine_rpm1 = output_rpm/(primary_gear * sprockets * gear1);\n    engine_rpm2 = o"
+      "utput_rpm/(primary_gear * sprockets * gear2);\n    engine_rpm3 = output_rpm/(primary_gear * sprockets * gear3);\n"
+      "    engine_rpm4 = output_rpm/(primary_gear * sprockets * gear4);\n    engine_rpm5 = output_rpm/(primary_gear * s"
+      "prockets * gear5);\n\n    if engine_rpm1 <= engine_rpm + engine_rpm * .1 && engine_rpm1 >= engine_rpm - engine_r"
+      "pm * .1\n        gear = 1;\n    end\n    if engine_rpm2 <= engine_rpm + engine_rpm * .1 && engine_rpm2 >= engine"
+      "_rpm - engine_rpm * .1\n        gear = 2;\n    end\n    if engine_rpm3 <= engine_rpm + engine_rpm * .1 && engine"
+      "_rpm3 >= engine_rpm - engine_rpm * .1\n        gear = 3;\n    end\n    if engine_rpm4 <= engine_rpm + engine_rpm"
+      " * .1 && engine_rpm4 >= engine_rpm - engine_rpm * .1\n        gear = 4;\n    end\n    if engine_rpm5 <= engine_r"
+      "pm + engine_rpm * .1 && engine_rpm5 >= engine_rpm - engine_rpm * .1\n        gear = 5;\n    end   \nend\n\n"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    4
+    ssIdNumber		    4
+    name		    "engine"
+    linkNode		    [2 0 5]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    5
+    ssIdNumber		    5
+    name		    "gear"
+    linkNode		    [2 4 6]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    6
+    ssIdNumber		    6
+    name		    "wheel"
+    linkNode		    [2 5 0]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    7
+    position		    [23.5747 49.5747 7]
+    chart		    2
+    linkNode		    [2 0 0]
+    subviewer		    2
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    8
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [32.125 19.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      7
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    2
+    linkNode		    [2 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    9
+    name		    "DashComm/Gear selector"
+    machine		    1
+    chart		    2
+  }
+  target {
+    id			    10
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
